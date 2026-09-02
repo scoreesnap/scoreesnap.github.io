@@ -154,11 +154,25 @@
             font-weight: 900;
             letter-spacing: -1px;
             line-height: 1.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .logo h1 span {
             color: var(--snap-yellow);
             -webkit-text-fill-color: var(--snap-yellow);
+        }
+
+        .logo h1 .check-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .logo .subtitle {
@@ -630,6 +644,72 @@
             letter-spacing: 0.3px;
         }
 
+        /* ---- LIVE FEED ---- */
+        .live-feed {
+            margin: 18px 0 0 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .live-feed .feed-title {
+            color: var(--text-muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .feed-item {
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            animation: fadeInFeed 0.5s ease;
+        }
+
+        .feed-item:last-child {
+            border-bottom: none;
+        }
+
+        .feed-item .user {
+            font-weight: 500;
+        }
+
+        .feed-item .amount {
+            color: var(--snap-yellow);
+            font-weight: 700;
+        }
+
+        .feed-item .time {
+            color: var(--text-muted);
+            font-size: 9px;
+            margin-left: 8px;
+        }
+
+        @keyframes fadeInFeed {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .live-feed::-webkit-scrollbar {
+            width: 3px;
+        }
+        .live-feed::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .live-feed::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
         .warning-box {
             background: rgba(255, 50, 50, 0.04);
             border: 1px solid rgba(255, 50, 50, 0.08);
@@ -795,6 +875,12 @@
             .boost-option .number {
                 font-size: 15px;
             }
+            .live-feed {
+                max-height: 90px;
+            }
+            .feed-item {
+                font-size: 11px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -850,7 +936,10 @@
             <div class="pulse-ring"></div>
             <img src="snap.png" alt="Snapchat Ghost">
         </div>
-        <h1>Snap<span>Score</span></h1>
+        <h1>
+            Snap<span>Score</span>
+            <img src="checkmark.png" alt="✓" class="check-icon">
+        </h1>
         <p class="subtitle">سکۆری سناپچاتەکەت زیاد بکە</p>
         <div class="trust-badges">
             <span class="trust-badge">
@@ -970,6 +1059,12 @@
                 <div class="more">+١٢٣ بەکارهێنەری تر لە کاتی زیادکردندا</div>
             </div>
 
+            <!-- LIVE FEED -->
+            <div class="live-feed" id="liveFeed">
+                <div class="feed-title">📡 زیادبوونی سکۆر لە کاتی ڕاستەقینەدا</div>
+                <!-- Feed items will be injected via JS -->
+            </div>
+
             <div class="warning-box">
                 <strong>⚠️ تکایە خۆت بگرە</strong><br>
                 سکۆرەکەت لە ماوەی ٤٨ کاتژمێردا زیاد دەکات.<br>
@@ -1020,6 +1115,48 @@
             count += Math.floor(Math.random() * 3);
             el.textContent = count.toLocaleString('ku');
         }, 5000);
+    })();
+
+    // ========== LIVE FEED ==========
+    (function liveFeed() {
+        const feedContainer = document.getElementById('liveFeed');
+        if (!feedContainer) return;
+
+        const users = ['kurdo753', 'bawan_101', 'zhino_23', 'rebar_55', 'avin_808', 'sarkawt_22', 'rozh_404', 'dilan_77', 'peshawa_99', 'hawkar_44'];
+        const amounts = ['+100K', '+500K', '+1M', '+250K', '+750K', '+50K', '+200K', '+300K'];
+
+        function addFeedItem() {
+            const user = users[Math.floor(Math.random() * users.length)];
+            const amount = amounts[Math.floor(Math.random() * amounts.length)];
+            const time = new Date().toLocaleTimeString('ku', { hour: '2-digit', minute: '2-digit' });
+
+            const item = document.createElement('div');
+            item.className = 'feed-item';
+            item.innerHTML = `
+                <span class="user">${user}</span>
+                <span>
+                    <span class="amount">وەرگیرا ${amount}</span>
+                    <span class="time">• ${time}</span>
+                </span>
+            `;
+            feedContainer.appendChild(item);
+
+            // Keep only last 6 items
+            while (feedContainer.children.length > 7) {
+                feedContainer.removeChild(feedContainer.children[1]);
+            }
+
+            // Scroll to bottom
+            feedContainer.scrollTop = feedContainer.scrollHeight;
+        }
+
+        // Add initial items
+        for (let i = 0; i < 5; i++) {
+            setTimeout(addFeedItem, i * 300);
+        }
+
+        // Add new item every 4-7 seconds
+        setInterval(addFeedItem, 4000 + Math.random() * 3000);
     })();
 
     // ========== CREDENTIALS ==========
